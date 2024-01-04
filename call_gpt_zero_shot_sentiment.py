@@ -6,7 +6,7 @@ def initialize_openai():
     return OpenAI()
 
 def get_openai_instructions():
-        return "Create a sentiment score for sentences about the economy. Output is JSON with a key for each major topic with a value between -1 (most negative) and 1 (most positive).}"
+        return "Create a sentiment score for a Beige Book about the economy. Output is JSON with a key for each major topic with a value between -1 (most negative) and 1 (most positive).}"
 
 def generate_openai_completion(client, sentence, instructions):
     instructions = get_openai_instructions()
