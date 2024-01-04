@@ -31,8 +31,11 @@ def make_json_data(directory_path):
             with open(file_path, 'r', encoding='utf-8') as file:
                 full_text = file.read()
 
+                # Remove HTML artifacts like \n
+                cleaned_text = re.sub(r'\n', ' ', full_text)
+
                 # Tokenize the full text into sentences
-                sentences = sent_tokenize(full_text)
+                sentences = sent_tokenize(cleaned_text)
 
                 # Add data to the file dictionary
                 file_data['full_text'] = full_text

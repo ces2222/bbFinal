@@ -6,18 +6,21 @@ def initialize_openai():
     return OpenAI()
 
 def get_openai_instructions():
-        return "Create a sentiment score for sentences about the economy. Respond with a json object with a key for each topic with a value between -1 (most negative) and 1 (most positive)."
+        return "Create a sentiment score for sentences about the economy. Output is JSON with a key for each major topic with a value between -1 (most negative) and 1 (most positive).}"
 
 def generate_openai_completion(client, sentence, instructions):
     instructions = get_openai_instructions()
     
     completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo-1106",
         messages=[
             {"role": "system", "content": instructions},
             {"role": "user", "content": sentence}
-        ])
-
+        ],
+        seed=1985,
+        response_format={ "type": "json_object" }
+        )
+        
     return completion
 
 def call_gpt_zero_sentiment(sentence):
